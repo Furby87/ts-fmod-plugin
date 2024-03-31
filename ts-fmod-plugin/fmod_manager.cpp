@@ -21,7 +21,7 @@ bool fmod_manager::load_selected_bank(const std::filesystem::path& plugin_files_
 
     if (!exists(selected_bank_file_path))
     {
-        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not find the 'selected.bank.txt' file");
+        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not find the 'selected.bank.txt' file");
         return false;
     }
 
@@ -29,7 +29,7 @@ bool fmod_manager::load_selected_bank(const std::filesystem::path& plugin_files_
     std::string bank_name;
     if (!selected_bank_file.is_open())
     {
-        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not read the 'selected.bank.txt' file");
+        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not read the 'selected.bank.txt' file");
         return false;
     }
 
@@ -47,14 +47,14 @@ bool fmod_manager::load_selected_bank(const std::filesystem::path& plugin_files_
         if (res != FMOD_OK)
         {
             std::stringstream ss;
-            ss << "[ts-fmod-plugin] Could not load the bank file '" << bank_name << "' in 'selected.bank.txt' file, " <<
+            ss << "[ts-fmod-plugin by Furby] Could not load the bank file '" << bank_name << "' in 'selected.bank.txt' file, " <<
                 FMOD_ErrorString(res);
             scs_log_(SCS_LOG_TYPE_error, ss.str().c_str());
             return false;
         }
         selected_bank_names_.push_back(bank_name);
         std::stringstream ss;
-        ss << "[ts-fmod-plugin] Using sound bank[" << i++ << "]: '" << bank_name << "'";
+        ss << "[ts-fmod-plugin by Furby] Using sound bank[" << i++ << "]: '" << bank_name << "'";
         scs_log_(SCS_LOG_TYPE_message, ss.str().c_str());
     }
     return true;
@@ -112,10 +112,10 @@ bool fmod_manager::init()
             if (i == 0) return false; // Only fail if not able to get the default device
         }
         scs_log_(SCS_LOG_TYPE_message,
-                 (std::string("[ts-fmod-plugin] Found output device[") + std::to_string(i) + "] " + device_name).
+                 (std::string("[ts-fmod-plugin by Furby] Found output device[") + std::to_string(i) + "] " + device_name).
                  c_str());
     }
-    scs_log_(SCS_LOG_TYPE_message, std::string("[ts-fmod-plugin] Selecting default output device (0)").c_str());
+    scs_log_(SCS_LOG_TYPE_message, std::string("[ts-fmod-plugin by Furby] Selecting default output device (0)").c_str());
 
     FMOD::Studio::Bank* bank;
 
@@ -257,7 +257,7 @@ bool fmod_manager::init_channels(const std::filesystem::path& plugin_files_dir)
     for (const std::string& bank_name : selected_bank_names_)
     {
         std::stringstream ss;
-        ss << "[ts-fmod-plugin] Loading the events and busses for '" << bank_name << "'";
+        ss << "[ts-fmod-plugin by Furby] Loading the events and busses for '" << bank_name << "'";
         scs_log_(SCS_LOG_TYPE_message, ss.str().c_str());
 
         auto guids_file_path = plugin_files_dir;

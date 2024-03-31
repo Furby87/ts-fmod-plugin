@@ -67,7 +67,7 @@ BEGIN
     BEGIN
         BLOCK "200004b0"
         BEGIN
-            VALUE "CompanyName", "Dario Wouters"
+            VALUE "CompanyName", "HackThePlanet"
             VALUE "FileDescription", "Sound Plugin for ATS/ETS2"
             VALUE "FileVersion", "1.49.0.0"
             VALUE "InternalName", "ts-fmod-plugin.dll"

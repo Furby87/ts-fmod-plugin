@@ -16,7 +16,7 @@ bool config::read_value(const json& j, const char* key, T* out_value) const
     catch (...)
     {
         std::stringstream ss;
-        ss << "[ts-fmod-plugin] Could not read config value '" << key << "', using default value '" << *out_value <<
+        ss << "[ts-fmod-plugin by Furby] Could not read config value '" << key << "', using default value '" << *out_value <<
             "'";
         scs_log_(SCS_LOG_TYPE_error, ss.str().c_str());
         return false;
@@ -53,7 +53,7 @@ bool config::load_config()
 {
     if (!exists(config_path_))
     {
-        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not find the 'sound_levels.txt' file");
+        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not find the 'sound_levels.txt' file");
         return false;
     }
 
@@ -62,7 +62,7 @@ bool config::load_config()
 
     if (!sound_levels_file.is_open())
     {
-        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not read the 'sound_levels.txt' file");
+        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not read the 'sound_levels.txt' file");
         return false;
     }
 
@@ -74,14 +74,14 @@ bool config::load_config()
     }
     catch (json::parse_error&)
     {
-        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not parse JSON from 'sound_levels.txt'");
+        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not parse JSON from 'sound_levels.txt'");
         return false;
     }
 
     if (!read_value(j, "config_version", &version) || version < current_config_version_)
     {
         scs_log_(SCS_LOG_TYPE_message,
-                 "[ts-fmod-plugin] Found older 'sound_levels.txt' version, upgrading to newer version");
+                 "[ts-fmod-plugin by Furby] Found older 'sound_levels.txt' version, upgrading to newer version");
         upgrade_to_v2(j);
     }
     else
@@ -96,7 +96,7 @@ bool config::load_config()
             !read_value(j, "exterior_when_windows_closed", &windows_closed))
         {
             scs_log_(SCS_LOG_TYPE_warning,
-                     "[ts-fmod-plugin] Found an incorrect setting in 'sound_levels.txt' file, resetting its value to default");
+                     "[ts-fmod-plugin by Furby] Found an incorrect setting in 'sound_levels.txt' file, resetting its value to default");
             save_config();
         }
     }
@@ -107,13 +107,13 @@ bool config::load_config()
 
 bool config::save_config()
 {
-    scs_log_(SCS_LOG_TYPE_message, "[ts-fmod-plugin] Saving the 'sound_levels.txt' file...");
+    scs_log_(SCS_LOG_TYPE_message, "[ts-fmod-plugin by Furby] Saving the 'sound_levels.txt' file...");
 
     std::ofstream sound_levels_file(config_path_, std::ios::trunc);
 
     if (!sound_levels_file.is_open())
     {
-        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not open the 'sound_levels.txt' file to write to.");
+        scs_log_(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not open the 'sound_levels.txt' file to write to.");
         return false;
     }
 

@@ -350,7 +350,7 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
     if (game_version != common::supported_game_version)
     {
         std::stringstream ss;
-        ss << "[ts-fmod-plugin V" << common::plugin_version << "] Detected game version 1." << game_version
+        ss << "[ts-fmod-plugin V" << common::plugin_version << " by Furby] Detected game version 1." << game_version
             << " while plugin is made for version 1." << common::supported_game_version <<
             ". The plugin will not load to prevent crashes.";
         scs_log(SCS_LOG_TYPE_error, ss.str().c_str());
@@ -358,13 +358,13 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
     }
     std::stringstream ss;
     ss << "[ts-fmod-plugin V" << common::plugin_version <<
-        "] Searching for memory offsets... If this is one of the last messages in the log after a crash, try disabling this plugin.";
+        " by Furby] Searching for memory offsets... If this is one of the last messages in the log after a crash, try disabling this plugin.";
     scs_log(SCS_LOG_TYPE_message, ss.str().c_str());
 
     const auto base_ctrl_ptr_offset = pattern::scan("48 8b 05 ? ? ? ? 48 8b 4b ? 48 8b 80 ? ? ? ? 48 8b b9", game_base, image_size);
     if (base_ctrl_ptr_offset == NULL)
     {
-        version_params->common.log(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Unable to find base_ctrl pointer offset");
+        version_params->common.log(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Unable to find base_ctrl pointer offset");
         return SCS_RESULT_generic_error;
     }
     base_ctrl_ptr = base_ctrl_ptr_offset + *reinterpret_cast<uint32_t*>(base_ctrl_ptr_offset + 3) + 7;
@@ -373,13 +373,13 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
     const auto unk_interior_ptr_offset = pattern::scan("44 38 3b 0f 84 ? ? ? ? 8b 05 ? ? ? ? 48 8b 3d ? ? ? ? 85 c0 74", game_base, image_size);
     if (unk_interior_ptr_offset == NULL)
     {
-        version_params->common.log(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Unable to find unk_interior pointer offset");
+        version_params->common.log(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Unable to find unk_interior pointer offset");
         return SCS_RESULT_generic_error;
     }
     unk_interior_ptr = unk_interior_ptr_offset + *reinterpret_cast<uint32_t*>(unk_interior_ptr_offset + 0x12) + 0x16;
 
     ss.str("");
-    ss << "[ts-fmod-plugin] Found base_ctrl @ " << std::hex << (base_ctrl_ptr - game_base) << " and unk_interior @" << (unk_interior_ptr - game_base);
+    ss << "[ts-fmod-plugin by Furby] Found base_ctrl @ " << std::hex << (base_ctrl_ptr - game_base) << " and unk_interior @" << (unk_interior_ptr - game_base);
     scs_log(SCS_LOG_TYPE_message, ss.str().c_str());
 
     const auto events_registered =
@@ -389,7 +389,7 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 
     if (!events_registered)
     {
-        version_params->common.log(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Unable to register event callbacks");
+        version_params->common.log(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Unable to register event callbacks");
         return SCS_RESULT_generic_error;
     }
     register_for_channel = version_params->register_for_channel;
@@ -398,13 +398,13 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 
     if (!fmod_manager_instance->init())
     {
-        scs_log(SCS_LOG_TYPE_error, "[ts-fmod-plugin] Could not init fmod");
+        scs_log(SCS_LOG_TYPE_error, "[ts-fmod-plugin by Furby] Could not init fmod");
         return SCS_RESULT_generic_error;
     }
 
     register_telem_channels();
 
-    scs_log(0, "[ts-fmod-plugin] Plugin loaded");
+    scs_log(0, "[ts-fmod-plugin by Furby] Plugin loaded");
 
     return SCS_RESULT_ok;
 }
