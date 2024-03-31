@@ -1,3 +1,5 @@
+!!CREDITS TO DARIOWOUTERS!!
+
 # FMOD sound plugin for ATS/ETS2
 
 A telemetry plugin for ATS/ETS2 that includes an FMOD instance so that you can use FMOD sound mods.
