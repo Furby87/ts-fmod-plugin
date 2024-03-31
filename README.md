@@ -1,4 +1,4 @@
-!!CREDITS TO DARIOWOUTERS!!
+!!CREDITS TO DARIOWOUTERS!! his work, just lil edits for myself
 
 # FMOD sound plugin for ATS/ETS2
 
